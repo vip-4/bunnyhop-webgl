@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Bunny Hop WebGL｜開源 Quake 風格連跳訓練遊戲</title>
+  <meta name="description" content="bunnyhop-webgl 是一款以 WebGL / BabylonJS 實作的開源第一人稱連跳（bunny hop / surf）訓練遊戲，重現 Quake、Half-Life 與 Fortress Forever 的地面加速與空中轉向物理。純前端、免安裝、免註冊，可直接於瀏覽器遊玩。">
+  <meta name="keywords" content="bunny hop, bunnyhop, surf, Quake, Half-Life, Fortress Forever, WebGL, BabylonJS, 開源遊戲, H5 遊戲, 連跳訓練, 第一人稱遊戲, JavaScript 遊戲">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="author" content="squeek502">
+  <meta name="theme-color" content="#0b1021">
+  <link rel="canonical" href="https://vip-4.github.io/bunnyhop-webgl/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Bunny Hop WebGL">
+  <meta property="og:locale" content="zh_TW">
+  <meta property="og:title" content="Bunny Hop WebGL｜開源 Quake 風格連跳訓練遊戲">
+  <meta property="og:description" content="以 WebGL / BabylonJS 重現 Quake、Half-Life 風格的連跳與 surf 物理。純前端開源遊戲，免安裝直接在瀏覽器練習 strafe jumping。">
+  <meta property="og:url" content="https://vip-4.github.io/bunnyhop-webgl/">
+  <meta property="og:image" content="https://vip-4.github.io/bunnyhop-webgl/assets/og-image.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Bunny Hop WebGL｜開源 Quake 風格連跳訓練遊戲">
+  <meta name="twitter:description" content="以 WebGL / BabylonJS 重現 Quake、Half-Life 風格的連跳與 surf 物理。純前端開源遊戲，免安裝直接在瀏覽器練習 strafe jumping。">
+  <meta name="twitter:image" content="https://vip-4.github.io/bunnyhop-webgl/assets/og-image.png">
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="sitemap" type="application/xml" href="sitemap.xml">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://vip-4.github.io/bunnyhop-webgl/#website",
+    "url": "https://vip-4.github.io/bunnyhop-webgl/",
+    "name": "Bunny Hop WebGL",
+    "description": "開源 Quake 風格連跳與 surf 訓練遊戲，以 WebGL / BabylonJS 實作。",
+    "inLanguage": "zh-Hant",
+    "publisher": { "@id": "https://vip-4.github.io/bunnyhop-webgl/#organization" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://vip-4.github.io/bunnyhop-webgl/#organization",
+    "name": "squeek502",
+    "url": "https://github.com/squeek502",
+    "description": "bunnyhop-webgl 原始作者與維護者"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "@id": "https://vip-4.github.io/bunnyhop-webgl/#software",
+    "name": "bunnyhop-webgl",
+    "alternateName": "Bunny Hop WebGL",
+    "url": "https://vip-4.github.io/bunnyhop-webgl/",
+    "applicationCategory": "GameApplication",
+    "operatingSystem": "Any modern web browser with WebGL",
+    "description": "以 JavaScript、WebGL 與 BabylonJS 實作的 Quake / Half-Life 風格連跳訓練遊戲，包含地面加速、空中轉向、摩擦與步高等物理模擬。",
+    "genre": "Platformer, Sports, Simulation",
+    "license": "https://unlicense.org/",
+    "author": { "@id": "https://vip-4.github.io/bunnyhop-webgl/#organization" },
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "@id": "https://vip-4.github.io/bunnyhop-webgl/#breadcrumb",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://vip-4.github.io/bunnyhop-webgl/" },
+      { "@type": "ListItem", "position": 2, "name": "遊戲說明", "item": "https://vip-4.github.io/bunnyhop-webgl/#game-info" },
+      { "@type": "ListItem", "position": 3, "name": "常見問題", "item": "https://vip-4.github.io/bunnyhop-webgl/#faq" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": "https://vip-4.github.io/bunnyhop-webgl/#faq",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "什麼是 bunny hop？",
+        "acceptedAnswer": { "@type": "Answer", "text": "Bunny hop（連跳）源自 Quake 與 Half-Life 的移動機制：玩家在落地瞬間再次跳躍，並配合左右轉向（strafing）累積速度，可比一般跑步更快。本遊戲以 WebGL 重現此種地面加速與空中轉向物理。" }
+      },
+      {
+        "@type": "Question",
+        "name": "要如何操作這款遊戲？",
+        "acceptedAnswer": { "@type": "Answer", "text": "使用 WASD 移動、空白鍵跳躍、Q 鍵使用 Concussion 重力效果。點擊畫面可鎖定滑鼠指標以轉動視角，右上角的 Pause/Unpause 可暫停或繼續遊戲。" }
+      },
+      {
+        "@type": "Question",
+        "name": "這款遊戲需要安裝或註冊嗎？",
+        "acceptedAnswer": { "@type": "Answer", "text": "不需要。這是一款純前端靜態遊戲，所有程式碼與相依套件都已隨網站打包，開啟網頁即可遊玩，免安裝、免註冊、免登入。" }
+      },
+      {
+        "@type": "Question",
+        "name": "原始碼是否可以自由使用？",
+        "acceptedAnswer": { "@type": "Answer", "text": "可以。原始專案 squeek502/bunnyhop-webgl 以 Unlicense 授權釋出，等同於公有領域，允許免費複製、修改、發布與商業使用。" }
+      },
+      {
+        "@type": "Question",
+        "name": "為什麼速度表或地面看起來異常？",
+        "acceptedAnswer": { "@type": "Answer", "text": "原始程式刻意使用名為 intentionally.missing 的紋理與未完成的訓練關卡，這是原作者保留的開發中狀態，並非部署錯誤；遊戲物理與操作完全正常。" }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0b1021;
+      --surface: rgba(11, 16, 33, .88);
+      --surface-solid: #111830;
+      --text: #e8ecf8;
+      --muted: #a9b4d0;
+      --gold: #fbbf24;
+      --primary: #6366f1;
+      --border: rgba(148, 163, 184, .28);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html, body {
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, "Segoe UI", "Noto Sans TC", sans-serif;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 0;
+      z-index: 100;
+      background: var(--gold);
+      color: #111;
+      padding: .6rem 1rem;
+      border-radius: 0 0 .5rem 0;
+    }
+    .skip-link:focus { left: 0; }
+
+    :focus-visible {
+      outline: 3px solid var(--gold);
+      outline-offset: 3px;
+    }
+
+    #renderCanvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      touch-action: none;
+    }
+
+    #hud {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      inset: 0;
+      touch-action: none;
+      pointer-events: none;
+      z-index: 2;
+    }
+    #hud * { pointer-events: auto; }
+
+    #speedometer-container, #debug, #controls {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      background: rgba(0,0,0,.5);
+      color: #fff;
+      font-size: 32px;
+      font-family: Consolas, "Andale Mono", monospace;
+      padding: 5px 15px;
+      z-index: 3;
+      border: 1px solid var(--border);
+      border-radius: .4rem;
+    }
+    #speedometer-container h2 { font-size: 24px; }
+    #debug {
+      font-size: 16px !important;
+      left: 10px !important;
+      right: auto !important;
+    }
+    #controls {
+      font-size: 16px !important;
+      top: 10px !important;
+      bottom: auto !important;
+    }
+    #controls a { color: var(--gold); }
+    h2 { margin: 0; margin-bottom: .25rem; }
+
+    .site-header {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 4;
+      pointer-events: none;
+    }
+    .site-header h1 {
+      margin: 0;
+      font-size: 1rem;
+      letter-spacing: .04em;
+      text-shadow: 0 2px 8px #000;
+    }
+    .site-header p {
+      margin: .25rem 0 0;
+      font-size: .78rem;
+      color: var(--muted);
+      text-shadow: 0 2px 8px #000;
+    }
+
+    .info-toggle {
+      pointer-events: auto;
+      cursor: pointer;
+      display: inline-block;
+      margin-top: .5rem;
+      font-size: .8rem;
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: .35rem;
+      padding: .35rem .65rem;
+    }
+    .info-toggle:hover { border-color: var(--gold); }
+
+    .info-panel {
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(4, 7, 18, .78);
+      padding: 1rem;
+      pointer-events: auto;
+    }
+    .info-panel[hidden] { display: none; }
+
+    .info-card {
+      width: min(760px, 100%);
+      max-height: 88vh;
+      overflow-y: auto;
+      background: var(--surface-solid);
+      border: 1px solid var(--border);
+      border-radius: .75rem;
+      padding: 1.4rem 1.6rem;
+      line-height: 1.7;
+      box-shadow: 0 24px 64px rgba(0,0,0,.55);
+    }
+    .info-card h2 { font-size: 1.25rem; margin: 1.4rem 0 .5rem; color: var(--gold); }
+    .info-card h2:first-child { margin-top: 0; }
+    .info-card p, .info-card li { color: var(--muted); }
+    .info-card ul { padding-left: 1.2rem; }
+    .info-card code {
+      background: rgba(148,163,184,.16);
+      padding: .1rem .35rem;
+      border-radius: .25rem;
+      color: var(--text);
+    }
+    .info-card a { color: #a5b4fc; }
+
+    .info-close {
+      cursor: pointer;
+      float: right;
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: .35rem;
+      padding: .3rem .7rem;
+      font-size: .85rem;
+    }
+
+    .site-footer {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      z-index: 2;
+      font-size: .72rem;
+      color: var(--muted);
+      text-shadow: 0 2px 8px #000;
+      pointer-events: none;
+    }
+    .site-footer a { color: #a5b4fc; pointer-events: auto; }
+
+    @media (max-width: 640px) {
+      #speedometer-container, #debug, #controls { font-size: 22px; }
+      #speedometer-container h2 { font-size: 18px; }
+      #debug, #controls { font-size: 13px !important; }
+      .site-footer { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+    }
+
+    @media print {
+      .site-header, .site-footer, #hud, #renderCanvas { display: none !important; }
+      .info-panel { position: static; background: #fff; padding: 0; }
+      .info-card { color: #111; background: #fff; border: none; box-shadow: none; max-height: none; }
+      .info-card p, .info-card li { color: #333; }
+    }
+  </style>
+
+  <script src="src/vendor/babylon-3.3.min.js"></script>
+  <script src="src/vendor/fpsmeter.min.js"></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#game-info">跳至遊戲說明</a>
+
+  <header class="site-header">
+    <h1>Bunny Hop WebGL</h1>
+    <p>Quake 風格連跳訓練場 · 純前端 WebGL 遊戲</p>
+    <button type="button" class="info-toggle" id="info-toggle" aria-expanded="false" aria-controls="game-info">遊戲說明 / 操作方式</button>
+  </header>
+
+  <main id="main">
+    <section id="game" aria-label="Bunny Hop 遊戲畫面">
+      <div id="hud">
+        <div id="speedometer-container"><h2>Speed</h2><div id="speedometer">0</div></div>
+        <div id="debug"></div>
+        <div id="controls">
+          <h2>Controls</h2>
+          <div>Move: WASD</div>
+          <div>Jump: Space</div>
+          <div>Conc: Q</div>
+          <a id="pause-button" href="#">Pause/Unpause</a>
+        </div>
+      </div>
+      <canvas id="renderCanvas" touch-action="none" aria-label="第一人稱連跳遊戲畫面，點擊可鎖定滑鼠"></canvas>
+    </section>
+
+    <article id="game-info" class="info-panel" hidden>
+      <div class="info-card" role="region" aria-label="遊戲說明">
+        <button type="button" class="info-close" id="info-close" aria-label="關閉說明">關閉 ✕</button>
+        <h2>關於這款遊戲</h2>
+        <p><strong>bunnyhop-webgl</strong> 是以 WebGL 與 BabylonJS 實作的開源第一人稱連跳（bunny hop / surf）訓練遊戲，重現 Quake、Half-Life 與 Fortress Forever 的地圖移動物理。原始專案由 squeek502 於 2019 年發布，以 Unlicense 授權釋出。</p>
+
+        <h2>操作方式</h2>
+        <ul>
+          <li><code>W A S D</code> — 移動與空中轉向（strafing）</li>
+          <li><code>Space</code> — 跳躍；落地瞬間再次跳躍可觸發 bunny hop 加速</li>
+          <li><code>Q</code> — Concussion 重力效果</li>
+          <li><code>滑鼠</code> — 點擊畫面鎖定指標後轉動視角</li>
+          <li><code>Pause/Unpause</code> — 暫停或繼續遊戲</li>
+        </ul>
+
+        <h2>物理特色</h2>
+        <p>遊戲實作了地面加速（ground accel）、空中加速（air accel）、摩擦力（friction）、停止速度（stopspeed）、階梯高度（stepsize）等 Quake 系列經典移動參數。速度表即時顯示水平移動速度，有助於練習 strafe jumping 的技巧。</p>
+
+        <h2>常見問題</h2>
+        <dl>
+          <dt><strong>需要安裝或註冊嗎？</strong></dt>
+          <dd>不需要。這是一款純前端靜態遊戲，所有程式碼與相依套件都已隨網站打包，開啟網頁即可遊玩。</dd>
+          <dt><strong>原始碼可以自由使用嗎？</strong></dt>
+          <dd>可以。原始專案採用 Unlicense 授權，等同公有領域，允許複製、修改與商業使用。</dd>
+          <dt><strong>地面纹理與未完成關卡是否正常？</strong></dt>
+          <dd>是。原始程式刻意使用 <code>intentionally.missing</code> 紋理並保留開發中關卡，這是原作者的原始狀態，不影響遊戲物理與操作。</dd>
+        </dl>
+
+        <h2>原始碼與授權</h2>
+        <p>原始專案：<a href="https://github.com/squeek502/bunnyhop-webgl" rel="noopener noreferrer">github.com/squeek502/bunnyhop-webgl</a> · 授權：<a href="https://unlicense.org/" rel="noopener noreferrer">Unlicense</a></p>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    原始碼 © squeek502 · Unlicense · <a href="llms.txt">AI 摘要</a> · <a href="sitemap.xml">網站地圖</a>
+  </footer>
+
+  <script type="module">
+    import Game from "./src/Game.js";
+    window.addEventListener('DOMContentLoaded', function(){
+      var fpsmeter = new FPSMeter(document.getElementById('hud'), {theme: 'dark', heat: 0, graph: 1});
+      var canvas = document.getElementById("renderCanvas");
+      var engine = new BABYLON.Engine(canvas, true);
+      var game = new Game(canvas, engine, fpsmeter);
+      var scene = game.createScene();
+      game.setScene(scene);
+
+      var paused = false;
+      var oldRenderLoop = null;
+      document.getElementById("pause-button").addEventListener("mouseup", function(e) {
+        if (paused) {
+          engine.runRenderLoop(oldRenderLoop);
+        } else {
+          oldRenderLoop = engine._activeRenderLoops[0];
+          engine.stopRenderLoop();
+        }
+        paused = !paused;
+        e.preventDefault();
+      });
+
+      var infoPanel = document.getElementById("game-info");
+      var toggle = document.getElementById("info-toggle");
+      function setInfo(open) {
+        infoPanel.hidden = !open;
+        toggle.setAttribute("aria-expanded", String(open));
+        if (open) document.getElementById("info-close").focus();
+        else toggle.focus();
+      }
+      toggle.addEventListener("click", function(){ setInfo(infoPanel.hidden); });
+      document.getElementById("info-close").addEventListener("click", function(){ setInfo(false); });
+      document.addEventListener("keydown", function(e){
+        if (e.key === "Escape" && !infoPanel.hidden) setInfo(false);
+      });
+    });
+  </script>
+</body>
+</html>
