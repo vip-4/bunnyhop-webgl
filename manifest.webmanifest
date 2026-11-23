@@ -1,0 +1,19 @@
+{
+  "name": "Bunny Hop WebGL｜開源 Quake 風格連跳訓練遊戲",
+  "short_name": "Bunny Hop",
+  "description": "以 WebGL / BabylonJS 實作的開源 bunny hop / surf 訓練遊戲。",
+  "start_url": "./",
+  "scope": "./",
+  "display": "fullscreen",
+  "background_color": "#0b1021",
+  "theme_color": "#0b1021",
+  "lang": "zh-Hant",
+  "icons": [
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
