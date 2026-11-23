@@ -1,0 +1,46 @@
+# Bunny Hop WebGL
+
+> 一款開源、純前端的 Quake 風格連跳（bunny hop / surf）訓練遊戲，以 JavaScript、WebGL 與 BabylonJS 實作，可直接在瀏覽器遊玩。
+
+官方部署網址：https://vip-4.github.io/bunnyhop-webgl/
+原始碼：https://github.com/squeek502/bunnyhop-webgl
+授權：Unlicense（公有領域）
+
+## 概述
+
+bunnyhop-webgl 由 squeek502 於 2019 年發布，目標是重現 Quake、Half-Life 與 Fortress Forever 的地面移動物理，作為連跳技巧訓練範例。整個遊戲為靜態網站，無需建置流程、無需後端、無需註冊，所有相依套件（BabylonJS 3.3、FPSMeter）皆已隨專案打包。
+
+## 核心特色
+
+- 第一人稱 3D 場景，由 BabylonJS 3.3 算繪
+- Quake 系列移動物理：地面加速、空中加速、摩擦、停止速度、階梯高度
+- 即時速度表與除錯資訊（座標、速度、onGround 狀態）
+- 鍵盤操作：WASD 移動、Space 跳躍、Q 使用 Concussion 效果
+- 點擊鎖定滑鼠指標以轉動視角
+- 支援 Pause / Unpause 暫停機制
+- Unlicense 授權，可自由修改與商業使用
+
+## 常見問題
+
+Q：什麼是 bunny hop？
+A：源自 Quake 與 Half-Life 的移動機制。玩家在落地瞬間再次跳躍，並配合左右轉向（strafing）累積速度，可比一般跑步更快。
+
+Q：需要安裝或註冊嗎？
+A：不需要。這是一款純前端靜態遊戲，開啟網頁即可遊玩。
+
+Q：原始碼可以自由使用嗎？
+A：可以。原始專案以 Unlicense 授權釋出，等同於公有領域。
+
+Q：地面紋理與未完成關卡是否正常？
+A：是。原始程式刻意使用名為 intentionally.missing 的紋理並保留開發中關卡，這是原作者的原始狀態，不影響遊戲物理與操作。
+
+## 技術說明
+
+- 入口：index.html
+- 遊戲邏輯：src/Game.js、src/Player.js、src/Collisions.js
+- 第三方套件：src/vendor/babylon-3.3.min.js、src/vendor/fpsmeter.min.js
+- 執行環境：任何支援 WebGL 與 ES modules 的現代瀏覽器
+
+## SEO / GEO 說明
+
+本站包含完整的中繼資料（title、description、keywords、Open Graph、Twitter Card）、JSON-LD 結構化資料（WebSite、Organization、SoftwareApplication、BreadcrumbList、FAQPage）、語意化 HTML5 標籤、robots.txt、sitemap.xml 與本檔案，供搜尋引擎與生成式 AI 摘要引用。
